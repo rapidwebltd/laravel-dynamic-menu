@@ -15,7 +15,7 @@ class MenuItem extends Model
 
     public function menuItems()
     {
-        return $this->hasMany(MenuItem::class, 'parent_id', 'id');
+        return $this->hasMany(MenuItem::class, 'parent_id', 'id')->with('menuItems')->with('menuable');
     }
 
     public function menuable()

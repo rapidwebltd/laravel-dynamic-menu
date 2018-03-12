@@ -17,7 +17,7 @@ class Menu extends Model
 
     public function menuItems()
     {
-        return $this->allMenuItems()->where('parent_id', 0);
+        return $this->allMenuItems()->where('parent_id', 0)->with('menuItems');
     }
 
     public function add($name, Menuable $menuable = null, $parent_id = 0)
@@ -39,7 +39,7 @@ class Menu extends Model
 
     public function clear()
     {
-        foreach($this->menuItems as $menuItem) {
+        foreach($this->allMenuItems as $menuItem) {
             $menuItem->delete();
         }
     }
