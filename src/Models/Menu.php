@@ -1,6 +1,7 @@
 <?php
 namespace RapidWeb\LaravelDynamicMenu\Models;
 
+use DOMDocument;
 use DOMElement;
 use Illuminate\Database\Eloquent\Model;
 use RapidWeb\LaravelDynamicMenu\Interfaces\Menuable;
@@ -12,6 +13,11 @@ class Menu extends Model
     public function menuItems()
     {
         return $this->hasMany(MenuItem::class);
+    }
+
+    public function topLevelMenuItems()
+    {
+        return $this->menuItems()->where('parent_id', 0);
     }
 
     public function add($name, Menuable $menuable = null, $parent_id = 0)
@@ -40,33 +46,35 @@ class Menu extends Model
 
     public function render()
     {
+        $domDoc = new DOMDocument('1.0');
+
         $ul = new DOMElement('ul');
+        $domDoc->appendChild($ul);
 
-        $this->renderMenuItems($ul, $this->menuItems);
+        $this->renderMenuItems($ul, $this->topLevelMenuItems);
 
-        return (new DOMDocument('1.0'))->saveHTML($ul);
+        return $domDoc->saveHTML($ul);
     }
 
     private function renderMenuItems(DOMElement $ul, $menuItems)
     {
         foreach($menuItems as $item) {
             
-            if ($this->menuable) {
-                $li = new DOMElement('li');
-                $a = new DOMElement('a', $item->name);
-                $a->setAttribute('href', $item->menuable->getMenuUrl());
-                $a->appendChild($li);
-            } else {
-                $li = new DOMElement('li', $item->name);
-            }
+            $li = new DOMElement('li');
+            $ul->appendChild($li);
+            
+            $a = new DOMElement('a', htmlspecialchars($item->name));
+            $li->appendChild($a);
 
-            if ($item->menuItems) {
+            if ($item->menuable) {
+                $a->setAttribute('href', $item->menuable->getMenuUrl());
+            }          
+
+            if (count($item->menuItems)>0) {
                 $newUl = new DOMElement('ul');
                 $li->appendChild($newUl);
                 $this->renderMenuItems($newUl, $item->menuItems);
             }
-
-            $ul->appendChild($ul);
         }
     }
 }
