@@ -10,6 +10,8 @@ class Menu extends Model
 {
     protected $table = 'ldm_menus';
 
+    private $renderOptions = [];
+
     public function menuItems()
     {
         return $this->hasMany(MenuItem::class);
@@ -44,12 +46,19 @@ class Menu extends Model
         }
     }
 
+    public function setRenderOptions($options = [])
+    {
+        $this->renderOptions = $options;
+    }
+
     public function render()
     {
         $domDoc = new DOMDocument('1.0');
 
         $ul = new DOMElement('ul');
         $domDoc->appendChild($ul);
+
+        $this->applyRenderOptions($ul);
 
         $this->renderMenuItems($ul, $this->topLevelMenuItems);
 
@@ -62,18 +71,34 @@ class Menu extends Model
             
             $li = new DOMElement('li');
             $ul->appendChild($li);
+
+            $this->applyRenderOptions($li);
             
             $a = new DOMElement('a', htmlspecialchars($item->name));
             $li->appendChild($a);
 
+            $this->applyRenderOptions($a);
+
             if ($item->menuable) {
                 $a->setAttribute('href', $item->menuable->getMenuUrl());
-            }          
+            }
 
             if (count($item->menuItems)>0) {
                 $newUl = new DOMElement('ul');
                 $li->appendChild($newUl);
+
+                $this->applyRenderOptions($newUl);
+                
                 $this->renderMenuItems($newUl, $item->menuItems);
+            }
+        }
+    }
+
+    private function applyRenderOptions(DOMElement $domElement) 
+    {
+        if (isset($this->renderOptions[$domElement->nodeName])) {
+            foreach($this->renderOptions[$domElement->nodeName] as $key => $value) {
+                $domElement->setAttribute($key, $value);
             }
         }
     }
