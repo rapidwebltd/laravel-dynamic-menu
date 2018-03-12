@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MenuItem extends Model
 {
-    protected $table = 'ldm_menuitems';
+    protected $table = 'ldm_menu_items';
 
     public function menu()
     {
