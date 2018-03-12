@@ -3,6 +3,7 @@
     "description": "Laravel Dynamic Menu",
     "type": "library",
     "require": {
+        "ext-dom": "*",
         "illuminate/database": "^5.5"
     },
     "license": "LGPL-3.0-only",

@@ -1,6 +1,7 @@
 <?php
 namespace RapidWeb\LaravelDynamicMenu\Models;
 
+use DOMElement;
 use Illuminate\Database\Eloquent\Model;
 use RapidWeb\LaravelDynamicMenu\Interfaces\Menuable;
 
@@ -34,6 +35,38 @@ class Menu extends Model
     {
         foreach($this->menuItems as $menuItem) {
             $menuItem->delete();
+        }
+    }
+
+    public function render()
+    {
+        $ul = new DOMElement('ul');
+
+        $this->renderMenuItems($ul, $this->menuItems);
+
+        return (new DOMDocument('1.0'))->saveHTML($ul);
+    }
+
+    private function renderMenuItems(DOMElement $ul, $menuItems)
+    {
+        foreach($menuItems as $item) {
+            
+            if ($this->menuable) {
+                $li = new DOMElement('li');
+                $a = new DOMElement('a', $item->name);
+                $a->setAttribute('href', $item->menuable->getMenuUrl());
+                $a->appendChild($li);
+            } else {
+                $li = new DOMElement('li', $item->name);
+            }
+
+            if ($item->menuItems) {
+                $newUl = new DOMElement('ul');
+                $li->appendChild($newUl);
+                $this->renderMenuItems($newUl, $item->menuItems);
+            }
+
+            $ul->appendChild($ul);
         }
     }
 }
