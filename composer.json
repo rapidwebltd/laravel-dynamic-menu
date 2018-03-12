@@ -1,0 +1,28 @@
+{
+    "name": "rapidwebltd/laravel-dynamic-menu",
+    "type": "library",
+    "require": {
+        "illuminate/database": "^5.5",
+        "illuminate/session": "^5.5",
+        "illuminate/support": "^5.5"
+    },
+    "license": "LGPL-3.0-only",
+    "authors": [
+        {
+            "name": "Jordan Hall",
+            "email": "jordan@hall05.co.uk"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "RapidWeb\\LaravelDynamicMenu\\": "./src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Rapidweb\\LaravelDynamicMenu\\Providers\\LaravelDynamicMenuServiceProvider"
+            ]
+        }
+    }
+}
