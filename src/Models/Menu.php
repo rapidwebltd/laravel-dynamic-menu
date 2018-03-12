@@ -29,4 +29,11 @@ class Menu extends Model
         
         return $menuItem;
     }
+
+    public function clear()
+    {
+        foreach($this->menuItems as $menuItem) {
+            $menuItem->delete();
+        }
+    }
 }
