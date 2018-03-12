@@ -1,8 +1,6 @@
 <?php
 namespace RapidWeb\LaravelDynamicMenu\Models;
 
-use DOMDocument;
-use DOMElement;
 use Illuminate\Database\Eloquent\Model;
 use RapidWeb\LaravelDynamicMenu\Interfaces\Menuable;
 
@@ -12,12 +10,12 @@ class Menu extends Model
 
     private $renderOptions = [];
 
-    public function menuItems()
+    public function allMenuItems()
     {
         return $this->hasMany(MenuItem::class);
     }
 
-    public function topLevelMenuItems()
+    public function menuItems()
     {
         return $this->menuItems()->where('parent_id', 0);
     }
@@ -46,60 +44,4 @@ class Menu extends Model
         }
     }
 
-    public function setRenderOptions($options = [])
-    {
-        $this->renderOptions = $options;
-    }
-
-    public function render()
-    {
-        $domDoc = new DOMDocument('1.0');
-
-        $ul = new DOMElement('ul');
-        $domDoc->appendChild($ul);
-
-        $this->applyRenderOptions($ul);
-
-        $this->renderMenuItems($ul, $this->topLevelMenuItems);
-
-        return $domDoc->saveHTML($ul);
-    }
-
-    private function renderMenuItems(DOMElement $ul, $menuItems)
-    {
-        foreach($menuItems as $item) {
-            
-            $li = new DOMElement('li');
-            $ul->appendChild($li);
-
-            $this->applyRenderOptions($li);
-            
-            $a = new DOMElement('a', htmlspecialchars($item->name));
-            $li->appendChild($a);
-
-            $this->applyRenderOptions($a);
-
-            if ($item->menuable) {
-                $a->setAttribute('href', $item->menuable->getMenuUrl());
-            }
-
-            if (count($item->menuItems)>0) {
-                $newUl = new DOMElement('ul');
-                $li->appendChild($newUl);
-
-                $this->applyRenderOptions($newUl);
-                
-                $this->renderMenuItems($newUl, $item->menuItems);
-            }
-        }
-    }
-
-    private function applyRenderOptions(DOMElement $domElement) 
-    {
-        if (isset($this->renderOptions[$domElement->nodeName])) {
-            foreach($this->renderOptions[$domElement->nodeName] as $key => $value) {
-                $domElement->setAttribute($key, $value);
-            }
-        }
-    }
 }
