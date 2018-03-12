@@ -1,2 +1,2 @@
-# laravel-dynamic-menu
+# 📃 Laravel Dynamic Menu
 Laravel Dynamic Menu
