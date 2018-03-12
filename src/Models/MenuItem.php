@@ -30,6 +30,6 @@ class MenuItem extends Model
 
     public function url()
     {
-        return $this->menuable ? $this->menuable->getMenuUrl : '';
+        return $this->menuable ? $this->menuable->getMenuUrl() : '';
     }
 }
