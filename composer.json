@@ -3,9 +3,7 @@
     "description": "Laravel Dynamic Menu",
     "type": "library",
     "require": {
-        "illuminate/database": "^5.5",
-        "illuminate/session": "^5.5",
-        "illuminate/support": "^5.5"
+        "illuminate/database": "^5.5"
     },
     "license": "LGPL-3.0-only",
     "authors": [
