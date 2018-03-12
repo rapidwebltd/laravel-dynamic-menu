@@ -17,7 +17,7 @@ class Menu extends Model
 
     public function menuItems()
     {
-        return $this->menuItems()->where('parent_id', 0);
+        return $this->allMenuItems()->where('parent_id', 0);
     }
 
     public function add($name, Menuable $menuable = null, $parent_id = 0)
