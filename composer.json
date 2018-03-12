@@ -22,7 +22,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Rapidweb\\LaravelDynamicMenu\\Providers\\LaravelDynamicMenuServiceProvider"
+                "RapidWeb\\LaravelDynamicMenu\\Providers\\LaravelDynamicMenuServiceProvider"
             ]
         }
     }
