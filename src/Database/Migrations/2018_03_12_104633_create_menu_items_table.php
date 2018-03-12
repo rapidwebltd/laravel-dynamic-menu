@@ -17,8 +17,8 @@ class CreateMenuItemsTable extends Migration
             $table->integer('menu_id')->index();
             $table->integer('parent_id')->index();
             $table->string('name');
-            $table->integer('basket_id')->index();
-            $table->integer('basketable_id')->index();
+            $table->integer('menuable_type')->index();
+            $table->integer('menuable_id')->index();
             $table->timestamps();
         });
     }
