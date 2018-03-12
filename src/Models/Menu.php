@@ -21,8 +21,8 @@ class Menu extends Model
         $menuItem->name = $name;
         
         if ($menuable) {
-            $this->menuable_id = $menuable->id;
-            $this->menuable_type = get_class($menuable);
+            $menuItem->menuable_id = $menuable->id;
+            $menuItem->menuable_type = get_class($menuable);
         }
 
         $menuItem->save();
