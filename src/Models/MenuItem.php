@@ -1,4 +1,5 @@
 <?php
+
 namespace RapidWeb\LaravelDynamicMenu\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +16,7 @@ class MenuItem extends Model
 
     public function menuItems()
     {
-        return $this->hasMany(MenuItem::class, 'parent_id', 'id')->with('menuItems')->with('menuable');
+        return $this->hasMany(self::class, 'parent_id', 'id')->with('menuItems')->with('menuable');
     }
 
     public function menuable()
