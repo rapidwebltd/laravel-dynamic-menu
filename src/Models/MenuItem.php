@@ -2,6 +2,7 @@
 namespace RapidWeb\LaravelDynamicMenu\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use RapidWeb\LaravelDynamicMenu\Interfaces\Menuable;
 
 class MenuItem extends Model
 {
