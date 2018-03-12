@@ -27,4 +27,9 @@ class MenuItem extends Model
     {
         return $this->menu->add($name, $menuable, $this->id);
     }
+
+    public function url()
+    {
+        return $this->menuable ? $this->menuable->getMenuUrl : '';
+    }
 }
