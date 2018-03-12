@@ -7,6 +7,11 @@ class MenuItem extends Model
 {
     protected $table = 'ldm_menus';
 
+    public function menu()
+    {
+        return $this->belongsTo(Menu::class);
+    }
+
     public function menuItems()
     {
         return $this->hasMany(MenuItem::class, 'id', 'parent_id');
@@ -15,5 +20,10 @@ class MenuItem extends Model
     public function menuable()
     {
         return $this->morphTo();
+    }
+
+    public function add($name, Menuable $menuable = null)
+    {
+        return $this->menu->add($name, $menuable, $this->id);
     }
 }
