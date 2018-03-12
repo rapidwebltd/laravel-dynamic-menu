@@ -1,5 +1,6 @@
 {
     "name": "rapidwebltd/laravel-dynamic-menu",
+    "description": "Laravel Dynamic Menu",
     "type": "library",
     "require": {
         "illuminate/database": "^5.5",
