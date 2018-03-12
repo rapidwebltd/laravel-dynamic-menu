@@ -17,7 +17,7 @@ class Menu extends Model
     {
         $menuItem = new MenuItem;
         $menuItem->menu_id = $this->id;
-        $menuable->parent_id = $parent_id;
+        $menuItem->parent_id = $parent_id;
         $menuItem->name = $name;
         
         if ($menuable) {
