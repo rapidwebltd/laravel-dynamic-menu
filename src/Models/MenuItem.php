@@ -8,6 +8,7 @@ use RapidWeb\LaravelDynamicMenu\Interfaces\Menuable;
 class MenuItem extends Model
 {
     protected $table = 'ldm_menu_items';
+    protected $with = ['menuItems', 'menuable'];
 
     public function menu()
     {
