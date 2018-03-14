@@ -14,7 +14,7 @@ class Menu extends Model
 
     public function allMenuItems()
     {
-        return $this->hasMany(MenuItem::class)->orderBy('display_order');
+        return $this->hasMany(MenuItem::class)->orderBy('display_order')->orderBy('id');
     }
 
     public function menuItems()
