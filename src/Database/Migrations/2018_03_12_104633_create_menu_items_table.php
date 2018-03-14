@@ -19,6 +19,7 @@ class CreateMenuItemsTable extends Migration
             $table->string('name');
             $table->string('menuable_type')->index();
             $table->integer('menuable_id')->index();
+            $table->decimal('display_order', 8, 2);
             $table->timestamps();
         });
     }
