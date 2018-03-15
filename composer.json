@@ -3,7 +3,6 @@
     "description": "Laravel Dynamic Menu provides the foundation to build entirely dynamic database powered navigation menus for your web application.",
     "type": "library",
     "require": {
-        "ext-dom": "*",
         "illuminate/database": "^5.5",
         "php": ">=7.0"
     },
