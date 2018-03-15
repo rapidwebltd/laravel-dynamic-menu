@@ -2,7 +2,7 @@
 
 [![StyleCI](https://styleci.io/repos/124873581/shield?branch=master)](https://styleci.io/repos/124873581)
 
-This packages provide the foundation to build entirely dynamic database powered navigation menus for your web application.
+This package provide the foundation to build entirely dynamic database powered navigation menus for your web application.
 
 ## Requirements
 
