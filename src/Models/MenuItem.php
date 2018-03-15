@@ -25,7 +25,7 @@ class MenuItem extends Model
         return $this->morphTo();
     }
 
-    public function add($name, Menuable $menuable = null)
+    public function add(string $name, Menuable $menuable = null)
     {
         return $this->menu->add($name, $menuable, $this->id);
     }

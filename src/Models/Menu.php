@@ -22,7 +22,7 @@ class Menu extends Model
         return $this->allMenuItems()->where('parent_id', 0)->with('menuItems');
     }
 
-    public function add($name, Menuable $menuable = null, $parent_id = 0)
+    public function add(string $name, Menuable $menuable = null, int $parent_id = 0)
     {
         $menuItem = new MenuItem();
         $menuItem->menu_id = $this->id;
