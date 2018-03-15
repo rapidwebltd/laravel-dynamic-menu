@@ -1,6 +1,6 @@
 {
     "name": "rapidwebltd/laravel-dynamic-menu",
-    "description": "Laravel Dynamic Menu",
+    "description": "Laravel Dynamic Menu provides the foundation to build entirely dynamic database powered navigation menus for your web application.",
     "type": "library",
     "require": {
         "ext-dom": "*",
